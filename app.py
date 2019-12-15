@@ -1,4 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
+from pymongo import MongoClient
+
+client = MongoClient()
+db = client.Albums
+albums = db.albums
+
 
 app = Flask(__name__)
 
@@ -7,7 +13,7 @@ app = Flask(__name__)
 #     """Return homepage."""
 #     return render_template('index.html')
 
-# OUR MOCK ARRAY OF PROJECTS
+# OUR ARRAY OF ALBUMS
 albums = [
     { 'title': 'Is This It', 'genre': 'Indie' },
     { 'title': 'Channel Orange', 'genre': 'R&B' },
