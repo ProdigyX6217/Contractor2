@@ -2,9 +2,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Albums</h1>
-    {% for album in albums %}
-        <h2>{{ album.title }}</h2>
-        <small>{{ album.description }}</small>
-    {% endfor %}
+<h1>Albums</h1>
+
+<!-- New link here -->
+<a href='/albums/new'>New Album</a><br></br>
+
+{% for album in albums %}
+    <!-- <h2>{{ album.title }}</h2>
+    <small>{{ album.genre }}</small>
+    <small>{{ album.artist }}</small>
+    <small>{{ album.url }}</small> -->
+
+    <h1>{{ album.title }}</h1>
+    <h2>{{ album.genre }}</h2>
+    <h3>{{ album.artist }}</h3>
+    <h4>{{ album.url }}</h4>
+{% endfor %}
 {% endblock %}

@@ -1,0 +1,43 @@
+<!-- templates/albums_new.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='POST' action='/albums'>
+    <fieldset>
+    <legend>New Album</legend>
+
+    <!-- TITLE -->
+    <p>
+        <label for='title'>Title</label><br>
+        <input type='text' name='title' />
+    </p>
+
+    <!-- GENRE -->
+    <p>
+        <label for='genre'>Genre</label><br>
+        <input type='text' name='genre' />
+    </p>
+
+    <!-- ARTIST -->
+    <p>
+        <label for='artist'>Artist</label><br>
+        <input type='text' name='artist' />
+    </p>
+
+    <!-- COVER ART -->
+    <p>
+        <label for='album-cover-art'>Cover Art</label><br>
+        <p>
+            Add photo link to Album:
+            <label for='url'>URL</label><br>
+            <input type='url' name='url'/>
+        </p>
+    </p>
+    </fieldset>
+
+    <!-- BUTTON -->
+    <p>
+        <button type='submit'>Save Album</button>
+    </p>
+</form>
+{% endblock %}
