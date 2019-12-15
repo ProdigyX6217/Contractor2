@@ -1,0 +1,23 @@
+<!-- templates/albums_show.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<a href='/'>Back to Home</a>
+
+<form method='POST' action='/albums'>
+    <!-- Add this line instead of all the form code -->
+    {% include 'partials/albums_form.html' %}
+</form>
+
+<h1>{{ album.title }}</h1>
+<h2>{{ album.genre }}</h2>
+<h3>{{ album.artist }}</h3>
+<h4>{{ album.rating }}</h4>
+<h5>{{ album.url }}</h5>
+
+{% for url in album.urls %}
+    <iframe width='420' height='315' src='{{ video }}'></iframe>
+
+
+{% endfor %}
+{% endblock %}
