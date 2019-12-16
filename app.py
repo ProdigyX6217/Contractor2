@@ -95,6 +95,12 @@ def albums_edit(album_id):
      # Add the title parameter here
      return render_template('albums_edit.html', album=album, title='Edit Album')
 
+@app.route('/albums/<album_id>/delete', methods=['POST'])
+def albums_delete(album_id):
+    """Delete one album."""
+    albums.delete_one({'_id': ObjectId(album_id)})
+    return redirect(url_for('albums_index'))
+
 
 
 

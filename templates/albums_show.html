@@ -20,4 +20,9 @@
 {% endfor %}
 
 <p><a href='/albums/{{ album._id }}/edit'>Edit</a></p>
+
+<!-- Delete button -->
+<p><form method='POST' action='/albums/{{ album._id }}/delete'>
+    <button type='submit'>Delete</button>
+</form></p>
 {% endblock %}
