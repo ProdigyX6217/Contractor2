@@ -1,0 +1,46 @@
+<!-- templates/partials/albums_form.html -->
+
+<fieldset>
+    <legend>{{ title }}</legend>
+    <!-- TITLE -->
+    <p>
+        <label for='album-title'>Title</label><br>
+        <input id='album-title' type='text' name='title' value='{{ album.title }}'/>
+    </p>
+    
+    <!-- GENRE -->
+    <p>
+      <label for='genre'>Genre</label><br>
+      <input id='genre' type='text' name='genre' value='{{ album.genre }}' />
+    </p>
+    
+    <!-- ARTIST -->
+    <p>
+        <label for='artist'>Artist</label><br>
+        <input id='artist' type='text' name='artist' value='{{ album.artist }}' />
+    </p>
+    
+    <!-- RATING -->
+    <p>
+        <label for='rating'>Rating</label><br>
+        <input id='rating' type='text' name='rating' value='{{ album.rating }}' />
+    </p>
+    
+    <!-- COVER ART -->
+    <p>
+        <label for='url'>Artist</label><br>
+        <input id='url' type='text' name='url' value='{{ album.url }}' />
+    </p>
+
+    <!-- IMAGE IDS -->
+    <p>
+        <label for='album-image-ids'>Images</label><br>
+        <p>Add the ID of the images you want to include in your album. Separate with a newline.</p>
+        <textarea id='album-image-ids' name='image_ids' rows='10'>{{ "\n".join(album.image_ids) }}</textarea>
+      </p>
+</fieldset>
+
+<!-- BUTTON -->
+<p>
+    <button type='submit'>Save Playlist</button>
+</p>
