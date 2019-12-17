@@ -15,16 +15,16 @@ albums = [
     { 'title': 'Channel Orange', 'genre': 'R&B', 'artist': 'Frank Ocean', 'url': 'https://bit.ly/2LZ7S3z' },
     { 'title': 'The Blueprint', 'genre': 'Hip-Hop', 'artist': 'JAY-Z', 'url': 'https://bit.ly/36Bc5lW' },
     { 'title': 'Dark Side of the Moon', 'genre': 'Rock', 'artist': 'Pink Floyd', 'url': 'https://bit.ly/2sqLR75' },
-    { 'title': 'Viva la Vida or Death and All His Friends', 'genre': 'Pop', 'artist': 'Coldplay', 'url': 'https://bit.ly/38G92KZ' },
+    { 'title': 'Viva la Vida or Death and All His Friends', 'genre': 'Pop', 'artist': 'Coldplay', 'url': 'https://bit.ly/38G92KZ' }
 
 ]
 
-def image_url_creator(id_lst):
-    images = []
-    for img_id in id_lst:
-        image = 'url' + img_id
-        images.append(image)
-    return images
+def video_url_creator(id_lst):
+    videos = []
+    for vid_id in id_lst:
+        video = 'url' + vid_id
+        videos.append(video)
+    return vivideo
 
 
 @app.route('/')
@@ -43,15 +43,16 @@ def albums_new():
 def albums_submit():
     """Submit a new album."""
 
-    image_ids = request.form.get('image_ids').split()
-    images = image_url_creator(image_ids)
+    video_ids = request.form.get('video_ids').split()
+    video = video_url_creator(video_ids)
 
     album = {
         'title': request.form.get('title'),
         'genre': request.form.get('genre'),
         'artist': request.form.get('artist'),
+        'rating': 'rating',
         'url': 'url',
-        'image_ids': 'image_ids'
+        'video_ids': 'video_ids'
     }
     album_id = albums.insert_one(album).inserted_id
     return redirect(url_for('albums_index'))
@@ -68,16 +69,17 @@ def albums_show(album_id):
 @app.route('/albums/<album_id>', methods=['POST'])
 def albums_update(album_id):
     """Submit an edited album."""
-    image_ids = request.form.get('image_ids').split()
-    albums = image_url_creator(image_ids)
+    video_ids = request.form.get('video_ids').split()
+    albums = video_url_creator(video_ids)
 
     # create our updated album
     updated_album = {
         'title': request.form.get('title'),
         'genre': request.form.get('genre'),
-        'artist': artist,
-        'url': url,
-        'image_ids': image_ids
+        'artist': request.form.get('artist'),
+        'rating': request.form.get('rating'),
+        'url': 'url',
+        'video_ids': 'video_ids'
     }
 
     # set the former album to the new one we just updated/edited
@@ -95,6 +97,7 @@ def albums_edit(album_id):
      # Add the title parameter here
      return render_template('albums_edit.html', album=album, title='Edit Album')
 
+
 @app.route('/albums/<album_id>/delete', methods=['POST'])
 def albums_delete(album_id):
     """Delete one album."""
@@ -102,7 +105,28 @@ def albums_delete(album_id):
     return redirect(url_for('albums_index'))
 
 
+@app.route('/albums/comments', methods=['POST'])
+def comments_new():
+    """Submit a new comment."""
+    # TODO: Fill in the code here to build the comment object,
+    # and then insert it into the MongoDB comments collection
+    comment = {
+        'title': request.form.get('title'),
+        'content': request.form.get('content'),
+        'album_id': ObjectId(request.form.get('album_id')),
+        'created_at': datetime.now()
+    }
+    print(comment)
+    comment_id = comments.insert_one(comment).inserted_id
+    return redirect(url_for('albums_show', album_id=request.form.get('album_id')))
 
+
+@app.route('/albums/comments/<comment_id>', methods=['POST'])
+def comments_delete(comment_id):
+    """Action to delete a comment."""
+    comment = comments.find_one({'_id': ObjectId(comment_id)})
+    comments.delete_one({'_id': ObjectId(comment_id)})
+    return redirect(url_for('albums_show', album_id=comment.get('album_id')))
 
 
 if __name__ == "__main__":

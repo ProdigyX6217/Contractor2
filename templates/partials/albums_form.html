@@ -28,15 +28,15 @@
     
     <!-- COVER ART -->
     <p>
-        <label for='url'>Artist</label><br>
+        <label for='url'>Cover Art</label><br>
         <input id='url' type='text' name='url' value='{{ album.url }}' />
     </p>
 
-    <!-- IMAGE IDS -->
+    <!-- VIDEO IDS -->
     <p>
-        <label for='album-image-ids'>Images</label><br>
-        <p>Add the ID of the images you want to include in your album. Separate with a newline.</p>
-        <textarea id='album-image-ids' name='image_ids' rows='10'>{{ "\n".join(album.image_ids) }}</textarea>
+        <label for='album-video-ids'>Ids</label><br>
+        <p>Add the ID of the video you want to include in your album. Separate with a newline.</p>
+        <textarea id='album-video-ids' name='video_ids' rows='10'>{{ "\n".join(album.video_ids) }}</textarea>
       </p>
 </fieldset>
 
